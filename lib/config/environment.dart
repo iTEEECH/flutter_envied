@@ -11,11 +11,10 @@ abstract class Environment implements Env {
   static void init() {
     const String env = String.fromEnvironment('env');
 
-    final Map<String, Environment> map = {
-      'dev': DevEnv(),
-      'prod': ProdEnv(),
+    _instance = switch (env) {
+      'dev' => DevEnv(),
+      'prod' => ProdEnv(),
+      _ => DevEnv(),
     };
-
-    _instance = map[env] ?? DevEnv();
   }
 }
